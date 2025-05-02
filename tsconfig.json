@@ -8,11 +8,12 @@
       "@/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
+    // 配置typescript类型声明
     "types": [
       "@dcloudio/types",
       "miniprogram-api-typings",
       "@uni-helper/uni-app-types",
-      "@uni-helper/uni-ui-types"
+      "@uni-helper/uni-ui-types",
     ]
   },
   "vueCompilerOptions": {
