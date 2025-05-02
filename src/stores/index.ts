@@ -1,4 +1,5 @@
 import { createPinia } from 'pinia'
+// 装入持久化插件
 import persist from 'pinia-plugin-persistedstate'
 
 // 创建 pinia 实例
