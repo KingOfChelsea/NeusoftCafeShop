@@ -1,6 +1,6 @@
 <template>
   <view class="carousel">
-    <swiper :circular="true" :autoplay="false" :interval="3000">
+    <swiper :circular="true" :autoplay="false" :interval="3000" @change="NeusoftOnchange">
       <swiper-item>
         <navigator url="/pages/index/index" hover-class="none" class="navigator">
           <image
@@ -43,7 +43,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const activeIndex = ref(0)
+const NeusoftOnchange: UniHelper.SwiperOnChange = (ev) => {
+  // activeIndex.value = ev.detail?.current ?? 0
+  // ! 可以使用非空断言来完善 主观上排除
+  activeIndex.value = ev.detail!.current
+}
 </script>
 
 <style lang="scss">
