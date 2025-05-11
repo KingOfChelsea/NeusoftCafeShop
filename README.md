@@ -36,7 +36,7 @@
 📚 资料索引  
 🔗 快速访问通道：
 
-- 📡 接口文档 → 🌐 [原链接保持不变]
+- 📡 接口文档 → 🌐 [https://www.apifox.cn/apidoc/shared/0e6ee326-d646-41bd-9214-29dbf47648fa]
 - 🎮 Demo 体验 → 👾 [模拟数据版] `(需VPN访问)`
 - 🔒 项目源码 → 🛡️ `联系@TechLeader获取权限`
 
