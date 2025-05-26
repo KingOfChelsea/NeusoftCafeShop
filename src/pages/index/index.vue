@@ -1,10 +1,10 @@
 <template>
   <NeusoftCustomNavbar></NeusoftCustomNavbar>
-  <scroll-view class="scroll-view" scroll-y>
+  <scroll-view class="scroll-view" scroll-y @scrolltolower="Neusoft_scrollToLower">
     <NeusoftSwiper :list="bannenrList"></NeusoftSwiper>
     <NeusoftCategoryPanel :list="categoryList"></NeusoftCategoryPanel>
     <NeusoftHotPanel :list="hotList"></NeusoftHotPanel>
-    <NeusoftGuess></NeusoftGuess>
+    <NeusoftGuess ref="Neusoft_RefGuess"></NeusoftGuess>
   </scroll-view>
 </template>
 
@@ -16,16 +16,17 @@ import { getHomeBannerAPI } from '@/services/NeusoftHomeBanner'
 import { getCategoryAPI } from '@/services/NeusoftHomeCategory'
 import type { NeusoftBannerItem } from '@/types/NeusoftBannerItem'
 import type { NeusoftCategoryItem } from '@/types/NeusoftCategoryItem'
+import type { NeusoftHotItem } from '@/types/NeusoftHotItem'
+import type { NeusoftGuessInstance } from '@/components/components'
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import { getHotAPI } from '@/services/NeusoftHomeHot'
-import type { NeusoftHotItem } from '@/types/NeusoftHotItem'
 
 // 1.变量/属性定义
 const bannenrList = ref<NeusoftBannerItem[]>([])
 const categoryList = ref<NeusoftCategoryItem[]>([])
 const hotList = ref<NeusoftHotItem[]>([])
-
+const Neusoft_RefGuess = ref<NeusoftGuessInstance>()
 //2.数据加载
 const Neusoft_getHomeBannerData = async () => {
   const res = await getHomeBannerAPI()
@@ -38,6 +39,10 @@ const Neusoft_getHomeCategoryData = async () => {
 const Neusoft_getHomeHotDataw = async () => {
   const res = await getHotAPI()
   hotList.value = res.result
+}
+const Neusoft_scrollToLower = () => {
+  console.log('滚动触底了...')
+  Neusoft_RefGuess.value?.Neusoft_getHomeGoodGuessLikeData()
 }
 
 //页面加载

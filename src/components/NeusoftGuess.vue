@@ -31,6 +31,10 @@ const getHomeGoodGuessLikeData = async () => {
   const res = await getGuessLikeAPI()
   guessList.value = res.result.items
 }
+// 暴露方法
+defineExpose({
+  Neusoft_getHomeGoodGuessLikeData: getHomeGoodGuessLikeData,
+})
 onMounted(() => {
   getHomeGoodGuessLikeData()
 })
