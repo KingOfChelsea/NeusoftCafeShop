@@ -18,7 +18,7 @@
       </view>
     </navigator>
   </view>
-  <view class="loading-text"> 正在加载... </view>
+  <view class="loading-text"> {{ finish ? '没有更多数据了哦~' : '正在加载...' }} </view>
 </template>
 
 <script setup lang="ts">
@@ -32,12 +32,21 @@ const pageParams: Required<NeusoftPageParams> = {
   page: 1,
   pageSize: 10,
 }
+const finish = ref(false)
+
 const getHomeGoodGuessLikeData = async () => {
+  if (finish.value === true) {
+    return uni.showToast({ icon: 'fail', title: '没有更多数据了哦~' })
+  }
   const res = await getGuessLikeAPI(pageParams)
-  // guessList.value = res.result.items
-  //数组的累加
   guessList.value.push(...res.result.items)
-  pageParams.page++
+  // 分页条件
+  if (pageParams.page < res.result.pages) {
+    // 页码累加
+    pageParams.page++
+  } else {
+    finish.value = true
+  }
 }
 // 暴露方法
 defineExpose({
