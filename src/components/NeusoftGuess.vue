@@ -28,13 +28,16 @@ import type { NeusoftPageParams } from '@/types/NeusoftPageParams'
 import { onMounted, ref } from 'vue'
 // 1.变量
 const guessList = ref<NeusoftGuessLikeItem[]>([])
-const pageParams: NeusoftPageParams = {
+const pageParams: Required<NeusoftPageParams> = {
   page: 1,
   pageSize: 10,
 }
 const getHomeGoodGuessLikeData = async () => {
   const res = await getGuessLikeAPI(pageParams)
-  guessList.value = res.result.items
+  // guessList.value = res.result.items
+  //数组的累加
+  guessList.value.push(...res.result.items)
+  pageParams.page++
 }
 // 暴露方法
 defineExpose({
