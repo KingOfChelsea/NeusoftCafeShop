@@ -24,9 +24,14 @@
 <script setup lang="ts">
 import { getGuessLikeAPI } from '@/services/NeusoftHomeGuessLike'
 import type { NeusoftGuessLikeItem } from '@/types/NeusoftGuessItem'
+import type { NeusoftPageParams } from '@/types/NeusoftPageParams'
 import { onMounted, ref } from 'vue'
-
+// 1.变量
 const guessList = ref<NeusoftGuessLikeItem[]>([])
+const pageParams: NeusoftPageParams = {
+  page: 1,
+  pageSize: 10,
+}
 const getHomeGoodGuessLikeData = async () => {
   const res = await getGuessLikeAPI()
   guessList.value = res.result.items
