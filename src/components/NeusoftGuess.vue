@@ -33,7 +33,7 @@ const pageParams: NeusoftPageParams = {
   pageSize: 10,
 }
 const getHomeGoodGuessLikeData = async () => {
-  const res = await getGuessLikeAPI()
+  const res = await getGuessLikeAPI(pageParams)
   guessList.value = res.result.items
 }
 // 暴露方法
