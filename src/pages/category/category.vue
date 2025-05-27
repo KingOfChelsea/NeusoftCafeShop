@@ -67,7 +67,7 @@ import { ref } from 'vue'
 const bannerList = ref<NeusoftBannerItem[]>([])
 const categoryList = ref<NeusoftCategoryTopItem[]>([])
 const activeIndex = ref(0)
-//方法
+//方法1
 const Neusoft_getBannerData = async () => {
   const res = await getHomeBannerAPI(2)
   bannerList.value = res.result
