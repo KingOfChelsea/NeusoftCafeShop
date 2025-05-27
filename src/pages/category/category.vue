@@ -10,8 +10,14 @@
     <view class="categories">
       <!-- 左侧：一级分类 -->
       <scroll-view class="primary" scroll-y>
-        <view v-for="(item, index) in 10" :key="item" class="item" :class="{ active: index === 0 }">
-          <text class="name"> 居家 </text>
+        <view
+          v-for="(item, index) in categoryList"
+          :key="item.id"
+          class="item"
+          :class="{ active: index === activeIndex }"
+          @tap="activeIndex = index"
+        >
+          <text class="name"> {{ item.name }} </text>
         </view>
       </scroll-view>
       <!-- 右侧：二级分类 -->
@@ -50,20 +56,31 @@
 </template>
 
 <script setup lang="ts">
+import { getCategoryTopAPI } from '@/services/NeusoftCategoryTop'
 import { getHomeBannerAPI } from '@/services/NeusoftHomeBanner'
 import type { NeusoftBannerItem } from '@/types/NeusoftBannerItem'
+import type { NeusoftCategoryTopItem } from '@/types/NeusoftCategoryTopItem'
 import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
+
 //属性
 const bannerList = ref<NeusoftBannerItem[]>([])
+const categoryList = ref<NeusoftCategoryTopItem[]>([])
+const activeIndex = ref(0)
 //方法
 const Neusoft_getBannerData = async () => {
   const res = await getHomeBannerAPI(2)
   bannerList.value = res.result
 }
 
+const Neusoft_getCategoryTopData = async () => {
+  const res = await getCategoryTopAPI()
+  categoryList.value = res.result
+}
+
 onLoad(() => {
   Neusoft_getBannerData()
+  Neusoft_getCategoryTopData()
 })
 </script>
 

@@ -5,3 +5,12 @@ export type PageResult<T> = {
   page: number //当前页数
   items: T[]
 }
+export type GoodsItem = {
+  id: string
+  name: string
+  desc: string
+  price: string
+  picture: string
+  discount: number
+  orderNum: number
+}
