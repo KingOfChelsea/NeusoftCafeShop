@@ -1,11 +1,7 @@
-<script setup lang="ts">
-//
-</script>
-
 <template>
-  <view class="cart">cart</view>
+  <view></view>
 </template>
 
-<style lang="scss">
-//
-</style>
+<script setup lang="ts"></script>
+
+<style lang="scss"></style>
