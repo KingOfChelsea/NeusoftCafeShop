@@ -37,5 +37,6 @@
   "window.zoomLevel": 1,
   "editor.fontSize": 18,
   "editor.lineHeight": 2,
-  "editor.fontLigatures": false
+  "editor.fontLigatures": false,
+  "TortoisegitButtons.TortoiseDirWindows": "F:\\Program Files\\TortoiseGit"
 }
