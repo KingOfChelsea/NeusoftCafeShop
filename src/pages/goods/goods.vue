@@ -291,6 +291,7 @@ page {
     .text {
       flex: 1;
       -webkit-line-clamp: 1;
+      line-clamp: 1;
     }
   }
 }
