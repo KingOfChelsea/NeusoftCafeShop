@@ -36,7 +36,7 @@
           <text class="label">送至</text>
           <text class="text ellipsis"> 请选择收获地址 </text>
         </view>
-        <view class="item arrow">
+        <view @tap="popup?.open()" class="item arrow">
           <text class="label">服务</text>
           <text class="text ellipsis"> 无忧退 快速退款 免费包邮 </text>
         </view>
@@ -106,6 +106,12 @@
       <view class="buynow"> 立即购买 </view>
     </view>
   </view>
+
+  <!-- uni-popup 弹出层 -->
+  <uni-popup ref="popup" type="bottom" background-color="#fff">
+    <view>内容1</view>
+    <button @tap="popup?.close">关闭弹出层</button>
+  </uni-popup>
 </template>
 
 <script lang="ts" setup>
@@ -121,8 +127,12 @@ const query = defineProps<{
 }>() // 商品ID用于查询详细数据
 const goods = ref<NeusoftGoodsResult>() // 商品数据
 const currentIndex = ref(0) // 轮播图下标
-// 2.方法
+const popup = ref<{
+  open: (type?: UniHelper.UniPopupType) => void
+  close: () => void
+}>() //uni-popup
 
+// 2.方法
 //2.1获取对应商品详细信息API接口
 const Neusoft_getGoodsByIdData = async () => {
   const res = await getGoodsByIdAPI(query.id)
@@ -136,7 +146,7 @@ onLoad(() => {
 
 //2.3 轮播图变化
 const NeusoftOnchange: UniHelper.SwiperOnChange = (ev) => {
-  console.log(ev.detail?.current)
+  // console.log(ev.detail?.current)
   currentIndex.value = ev.detail?.current
 }
 
