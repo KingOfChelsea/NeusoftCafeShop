@@ -1,5 +1,5 @@
 <template>
-  <view class="viewport">
+  <view class="viewport" v-if="isFinsh">
     <!-- 搜索框 -->
     <view class="search">
       <view class="input">
@@ -50,6 +50,7 @@
       </scroll-view>
     </view>
   </view>
+  <NeusoftPageSkeleton v-else />
 </template>
 
 <script setup lang="ts">
@@ -59,11 +60,15 @@ import type { NeusoftBannerItem } from '@/types/NeusoftBannerItem'
 import type { NeusoftCategoryTopItem } from '@/types/NeusoftCategoryTopItem'
 import { onLoad } from '@dcloudio/uni-app'
 import { computed, ref } from 'vue'
+import NeusoftPageSkeleton from './components/NeusoftPageSkeleton.vue'
 
 //属性
 const bannerList = ref<NeusoftBannerItem[]>([])
 const categoryList = ref<NeusoftCategoryTopItem[]>([])
 const activeIndex = ref(0)
+const isFinsh = ref(false) // 是否加载完成1
+
+//方法
 const Neusoft_getBannerData = async () => {
   const res = await getHomeBannerAPI(2)
   bannerList.value = res.result
@@ -79,9 +84,9 @@ const Neusoft_subCategoryList = computed(() => {
   return categoryList.value[activeIndex.value]?.children || []
 })
 
-onLoad(() => {
-  Neusoft_getBannerData()
-  Neusoft_getCategoryTopData()
+onLoad(async () => {
+  await Promise.all([Neusoft_getBannerData(), Neusoft_getCategoryTopData()])
+  isFinsh.value = true
 })
 </script>
 
