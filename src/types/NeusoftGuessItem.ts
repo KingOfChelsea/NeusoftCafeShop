@@ -1,5 +1,5 @@
 export type NeusoftGuessLikeItem = {
-  id: 'string'
+  id: string
   name: string
   desc: string
   price: number

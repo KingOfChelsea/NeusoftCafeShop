@@ -8,7 +8,7 @@
       class="guess-item"
       v-for="item in guessList"
       :key="item.id"
-      :url="`/pages/goods/goods?id=4007498`"
+      :url="`/pages/goods/goods?id=${item.id}`"
     >
       <image class="image" mode="aspectFill" :src="item.picture"></image>
       <view class="name"> {{ item.name }} </view>
@@ -40,6 +40,8 @@ const getHomeGoodGuessLikeData = async () => {
   }
   const res = await getGuessLikeAPI(pageParams)
   guessList.value.push(...res.result.items)
+  console.log(guessList.value)
+
   // 分页条件
   if (pageParams.page < res.result.pages) {
     // 页码累加
