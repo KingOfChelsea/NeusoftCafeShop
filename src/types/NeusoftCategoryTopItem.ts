@@ -5,7 +5,7 @@ export type NeusoftCategoryTopItem = {
   name: string
   picture: string
   imageBanners: string[]
-  children: []
+  children: CategoryChildItem[]
 }
 
 export type CategoryChildItem = {
